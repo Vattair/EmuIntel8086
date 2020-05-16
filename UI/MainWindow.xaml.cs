@@ -39,6 +39,7 @@ namespace UI
                 case "HELP":
                     Console_Write("EXAMPLE <komenda> -- wyświetlenie przykładów użycia komend.");
                     Console_Write("MOV <cel> <źródło> -- MOV kopiuje dane z źródła do celu.");
+                    Console_Write("XCHG <reg> <reg> -- Przemienna zamiana wartości między rejestrami");
                     break;
                 case "EXAMPLE":
                     if (data.Length == 2)
@@ -182,6 +183,10 @@ namespace UI
                     Console_Write("MOV AX 10 -- Wklejenie wartości 10(decimal) do rejestru AX.");
                     Console_Write("MOV AX 15h -- Wklejenie wartości 0x0015(hexadecimal) do rejestru AX.");
                     Console_Write("MOV AL 15h -- Wklejenie wartości 0x15(hexadecimal) do rejestru AL.");
+                    break;
+                case "XCHG":
+                    Console_Write("XCHG AX BX -- Przemienna zamiana wartości między rejestrami AX BX");
+                    Console_Write("XCHG AL BH -- Przemienna zamiana wartości między rejestrami AL BH");
                     break;
                 default:
                     Console_Write($"Brak komendy o nazwie {v}");
@@ -373,5 +378,7 @@ namespace UI
                 return "00";
             }
         }
+
+
     }
 }
