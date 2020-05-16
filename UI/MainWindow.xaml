@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="Emulator Intel8086" Height="400" Width="625" ResizeMode="NoResize">
     <Grid>
-        <TextBox x:Name="ConsoleInput" HorizontalAlignment="Left" Height="30" Margin="10,0,0,10" TextWrapping="NoWrap" AcceptsReturn="False" MaxLength="50" Text="" VerticalAlignment="Bottom" Width="480" FontSize="16"/>
-        <TextBox x:Name="_Console" VerticalContentAlignment="Bottom" TextWrapping="Wrap" IsReadOnly="True" HorizontalAlignment="Left" Height="200" Margin="10,0,0,50" AcceptsReturn="True" Text="" VerticalAlignment="Bottom" Width="480" FontSize="16"/>
+        <TextBox x:Name="ConsoleInput"  HorizontalAlignment="Left" Height="30" Margin="10,0,0,10" TextWrapping="NoWrap" AcceptsReturn="False" MaxLength="50" Text="" VerticalAlignment="Bottom" Width="480" FontSize="16">
+        </TextBox>
+        <TextBox x:Name="_Console" VerticalContentAlignment="Bottom" TextWrapping="Wrap" IsReadOnly="True" HorizontalAlignment="Left" Height="200" Margin="10,0,0,50" AcceptsReturn="True" Text="" VerticalAlignment="Bottom" Width="590" FontSize="16"/>
         <Button x:Name="ConsoleSubmit" Content="Zatwierdź" HorizontalAlignment="Left" Margin="495,0,0,10" VerticalAlignment="Bottom" Width="105" Height="30" Click="ConsoleSubmit_Click"/>
         <Grid HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" VerticalAlignment="Top" Width="599">
             <Grid HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="140">
