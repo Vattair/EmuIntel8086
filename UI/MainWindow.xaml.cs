@@ -40,6 +40,7 @@ namespace UI
                     Console_Write("EXAMPLE <komenda> -- wyświetlenie przykładów użycia komend.");
                     Console_Write("MOV <cel> <źródło> -- MOV kopiuje dane z źródła do celu.");
                     Console_Write("XCHG <reg> <reg> -- Przemienna zamiana wartości między rejestrami");
+                    Console_Write("NOT <reg> -- W postaci binarnej zamiana 1 <-> 0");
                     break;
                 case "EXAMPLE":
                     if (data.Length == 2)
@@ -124,11 +125,98 @@ namespace UI
                         Console_Write($"Niepoprawna ilość danych.");
                     }
                     break;
-
+                case "NOT":
+                    if (data.Length == 2)
+                    {
+                        Console_Write($"Wykonuję NOT dla {data[1]} ...");
+                        if (data[1] == "AX" || data[1] == "BX" || data[1] == "CX" || data[1] == "DX")
+                        {
+                            NOT(data[1], 0);
+                        }
+                        else if (data[1] == "AL" || data[1] == "AH" || data[1] == "BL" || data[1] == "BH" || data[1] == "CL" || data[1] == "CH" || data[1] == "DL" || data[1] == "DH")
+                        {
+                            NOT(data[1], 1);
+                        }
+                        else
+                        {
+                            Console_Write("Niepoprawne użycie komendy.");
+                        }
+                    }
+                    else
+                    {
+                        Console_Write($"Niepoprawna ilość danych.");
+                    }
+                    break;
                 default:
                     Console_Write("Niepoprawna komenda.");
                     break;
             }
+        }
+
+        private void NOT(string v1, int v2)
+        {
+            if (v2 == 0)
+            {
+                string v1d = BinToHex(Invert01(HexToBinary(GetDataFromMainReg(v1), 0)), 0);
+                SetRegisterContent(v1, v1d);
+            }
+            else if (v2 == 1)
+            {
+                string v1d = BinToHex(Invert01(HexToBinary(GetDataFromReg(v1), 1)), 1);
+                SetRegisterContent(v1, v1d);
+            }
+            else
+            {
+                Console_Write("Error");
+            }
+        }
+
+        private string BinToHex(string v, int t)
+        {
+            if (t == 0)
+            {
+                return Convert.ToInt32(v, 2).ToString("X");
+            }
+            else
+            {
+                return Convert.ToInt32(v, 2).ToString("X");
+            }
+        }
+
+        private string Invert01(string v)
+        {
+            char[] c = v.ToCharArray();
+            string result = "";
+            for (int i = 0; i < c.Length; i++)
+            {
+                if(c[i] == '0')
+                {
+                    result = result + "1";
+                } 
+                else if(c[i] == '1')
+                {
+                    result = result + "0";
+                }
+                else
+                {
+                    Console_Write("Error");
+                }
+            }
+            return result;
+        }
+
+        private string HexToBinary(string v, int t)
+        {
+            Console_Write("HexToBinary S : " + v);
+            string result;
+            if (t == 1) {
+                result = Convert.ToString(Convert.ToInt32(v, 16), 2).PadLeft(8, '0');
+            }
+            else
+            {
+                result = Convert.ToString(Convert.ToInt32(v, 16), 2).PadLeft(16, '0');
+            }
+            return result;
         }
 
         private void XCHG(string v1, string v2, int t)
@@ -253,6 +341,10 @@ namespace UI
                 case "XCHG":
                     Console_Write("XCHG AX BX -- Przemienna zamiana wartości między rejestrami AX BX");
                     Console_Write("XCHG AL BH -- Przemienna zamiana wartości między rejestrami AL BH");
+                    break;
+                case "NOT":
+                    Console_Write("NOT AX -- Jeśli rejestr posiadał 0xFFFF zmieni na 0x0000");
+                    Console_Write("NOT AL -- Jeśli rejestr posiadał 0x0B zmieni na 0xF4");
                     break;
                 default:
                     Console_Write($"Brak komendy o nazwie {v}");
