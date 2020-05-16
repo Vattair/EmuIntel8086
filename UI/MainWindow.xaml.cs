@@ -207,7 +207,6 @@ namespace UI
 
         private string HexToBinary(string v, int t)
         {
-            Console_Write("HexToBinary S : " + v);
             string result;
             if (t == 1) {
                 result = Convert.ToString(Convert.ToInt32(v, 16), 2).PadLeft(8, '0');
