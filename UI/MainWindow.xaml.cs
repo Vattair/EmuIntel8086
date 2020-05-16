@@ -28,8 +28,14 @@ namespace UI
         private void ConsoleSubmit_Click(object sender, RoutedEventArgs e)
         {
             string consoleText = ConsoleInput.Text;
+            Console_Write(consoleText);
             
-            
+        }
+
+        private void Console_Write(string o)
+        {
+            _Console.Text = $"{_Console.Text}{Environment.NewLine}{o}";
+            _Console.ScrollToEnd();
         }
     }
 }

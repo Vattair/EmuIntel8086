@@ -8,40 +8,40 @@
         Title="Emulator Intel8086" Height="400" Width="625" ResizeMode="NoResize">
     <Grid>
         <TextBox x:Name="ConsoleInput" HorizontalAlignment="Left" Height="30" Margin="10,0,0,10" TextWrapping="NoWrap" AcceptsReturn="False" MaxLength="50" Text="" VerticalAlignment="Bottom" Width="480" FontSize="16"/>
-        <TextBox x:Name="ConsoleHistory" IsReadOnly="True" HorizontalAlignment="Left" Height="200" Margin="10,0,0,50" AcceptsReturn="False" Text="abc&#xD;&#xA;cccc&#xD;&#xA;aaaa" VerticalAlignment="Bottom" Width="480" FontSize="16"/>
+        <TextBox x:Name="_Console" VerticalContentAlignment="Bottom" TextWrapping="Wrap" IsReadOnly="True" HorizontalAlignment="Left" Height="200" Margin="10,0,0,50" AcceptsReturn="True" Text="" VerticalAlignment="Bottom" Width="480" FontSize="16"/>
         <Button x:Name="ConsoleSubmit" Content="Zatwierdź" HorizontalAlignment="Left" Margin="495,0,0,10" VerticalAlignment="Bottom" Width="105" Height="30" Click="ConsoleSubmit_Click"/>
         <Grid HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" VerticalAlignment="Top" Width="599">
             <Grid HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="140">
                 <Label Content="AX" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="60,0,0,0" VerticalAlignment="Top"/>
-                <Label Content="0x0000" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="50,20,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="AXContent" Content="0x0000" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="50,20,0,0" VerticalAlignment="Top"/>
                 <Label Content="AH" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="20,40,0,0" VerticalAlignment="Top"/>
-                <Label Content="0x00" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="15,60,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="AHContent" Content="0x00" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="15,60,0,0" VerticalAlignment="Top"/>
                 <Label Content="AL" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,40,20,0" VerticalAlignment="Top"/>
-                <Label Content="0x00" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,60,15,0" VerticalAlignment="Top"/>
+                <Label x:Name="ALContent" Content="0x00" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,60,15,0" VerticalAlignment="Top"/>
             </Grid>
             <Grid HorizontalAlignment="Left" Height="100" Margin="150,10,0,0" VerticalAlignment="Top" Width="140">
                 <Label Content="BX" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="60,0,0,0" VerticalAlignment="Top"/>
-                <Label Content="0x0000" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="50,20,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="BXContent" Content="0x0000" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="50,20,0,0" VerticalAlignment="Top"/>
                 <Label Content="BH" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="20,40,0,0" VerticalAlignment="Top"/>
-                <Label Content="0x00" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="15,60,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="BHContent" Content="0x00" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="15,60,0,0" VerticalAlignment="Top"/>
                 <Label Content="BL" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,40,20,0" VerticalAlignment="Top"/>
-                <Label Content="0x00" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,60,15,0" VerticalAlignment="Top"/>
+                <Label x:Name="BLContent" Content="0x00" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,60,15,0" VerticalAlignment="Top"/>
             </Grid>
             <Grid HorizontalAlignment="Left" Height="100" Margin="300,10,0,0" VerticalAlignment="Top" Width="140">
                 <Label Content="CX" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="60,0,0,0" VerticalAlignment="Top"/>
-                <Label Content="0x0000" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="50,20,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="CXContent" Content="0x0000" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="50,20,0,0" VerticalAlignment="Top"/>
                 <Label Content="CH" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="20,40,0,0" VerticalAlignment="Top"/>
-                <Label Content="0x00" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="15,60,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="CHContent" Content="0x00" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="15,60,0,0" VerticalAlignment="Top"/>
                 <Label Content="CL" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,40,20,0" VerticalAlignment="Top"/>
-                <Label Content="0x00" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,60,15,0" VerticalAlignment="Top"/>
+                <Label x:Name="CLContent" Content="0x00" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,60,15,0" VerticalAlignment="Top"/>
             </Grid>
             <Grid HorizontalAlignment="Left" Height="100" Margin="450,10,0,0" VerticalAlignment="Top" Width="140">
                 <Label Content="DX" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="60,0,0,0" VerticalAlignment="Top"/>
-                <Label Content="0x0000" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="50,20,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="DXContent" Content="0x0000" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="50,20,0,0" VerticalAlignment="Top"/>
                 <Label Content="DH" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="20,40,0,0" VerticalAlignment="Top"/>
-                <Label Content="0x00" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="15,60,0,0" VerticalAlignment="Top"/>
+                <Label x:Name="DHContent" Content="0x00" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="15,60,0,0" VerticalAlignment="Top"/>
                 <Label Content="DL" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,40,20,0" VerticalAlignment="Top"/>
-                <Label Content="0x00" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,60,15,0" VerticalAlignment="Top"/>
+                <Label x:Name="DLContent" Content="0x00" HorizontalAlignment="Right" HorizontalContentAlignment="Center" Margin="0,60,15,0" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
     </Grid>
