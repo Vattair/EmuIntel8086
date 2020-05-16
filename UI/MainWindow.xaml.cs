@@ -52,28 +52,71 @@ namespace UI
                     }
                     break;
                 case "MOV":
-                    if (data.Length == 3)
+                    if (data[1] == "AX" || data[1] == "BX" || data[1] == "CX" || data[1] == "DX" || data[1] == "AL" || data[1] == "AH" || data[1] == "BL" || data[1] == "BH" || data[1] == "CL" || data[1] == "CH" || data[1] == "DL" || data[1] == "DH")
                     {
-                        Console_Write($"Wykonano MOV {data[2]} -> {data[1]}");
-                        if (data[2] == "AX" || data[2] == "BX" || data[2] == "CX" || data[2] == "DX") 
+                        if (data.Length == 3)
                         {
-                            MOV(data[1], GetDataFromMainReg(data[2]));
-                        } 
-                        else if (data[2] == "AL" || data[2] == "AH" || data[2] == "BL" || data[2] == "BH" || data[2] == "CL" || data[2] == "CH" || data[2] == "DL" || data[2] == "DH")
-                        {
-                            MOV(data[1], GetDataFromReg(data[2]));
-                        }
-                        else if (data[2].Substring(data[2].Length - 1) == "h")
-                        {
-                            MOV(data[1], data[2].TrimEnd('h'));
-                        }
-                        else if (data[2].Substring(data[2].Length - 1) == "H")
-                        {
-                            MOV(data[1], data[2].TrimEnd('H'));
+                            Console_Write($"Wykonuję MOV {data[2]} -> {data[1]} ...");
+                            if (data[2] == "AX" || data[2] == "BX" || data[2] == "CX" || data[2] == "DX")
+                            {
+                                MOV(data[1], GetDataFromMainReg(data[2]));
+                            }
+                            else if (data[2] == "AL" || data[2] == "AH" || data[2] == "BL" || data[2] == "BH" || data[2] == "CL" || data[2] == "CH" || data[2] == "DL" || data[2] == "DH")
+                            {
+                                MOV(data[1], GetDataFromReg(data[2]));
+                            }
+                            else if (data[2].Substring(data[2].Length - 1) == "h")
+                            {
+                                MOV(data[1], data[2].TrimEnd('h'));
+                            }
+                            else if (data[2].Substring(data[2].Length - 1) == "H")
+                            {
+                                MOV(data[1], data[2].TrimEnd('H'));
+                            }
+                            else
+                            {
+                                MOV(data[1], CalculateToHex(data[2]));
+                            }
                         }
                         else
                         {
-                            MOV(data[1], CalculateToHex(data[2]));
+                            Console_Write($"Niepoprawna ilość danych.");
+                        }
+                    }
+                    else
+                    {
+                        Console_Write("Niepoprawne użycie komendy.");
+                    }
+                    break;
+                case "XCHG":
+                    if (data.Length == 3)
+                    {
+                        Console_Write($"Wykonuję XCHG {data[1]} - {data[2]} ...");
+                        if (data[1] == "AX" || data[1] == "BX" || data[1] == "CX" || data[1] == "DX")
+                        {
+                            if (data[2] == "AX" || data[2] == "BX" || data[2] == "CX" || data[2] == "DX")
+                            {
+                                XCHG(data[1], data[2], 0);
+                            }
+                            else
+                            {
+                                Console_Write("Niepoprawne użycie komendy.");
+                            }
+                        }
+                        else if (data[1] == "AL" || data[1] == "AH" || data[1] == "BL" || data[1] == "BH" || data[1] == "CL" || data[1] == "CH" || data[1] == "DL" || data[1] == "DH")
+                        {
+                            if (data[2] == "AL" || data[2] == "AH" || data[2] == "BL" || data[2] == "BH" || data[2] == "CL" || data[2] == "CH" || data[2] == "DL" || data[2] == "DH")
+                            {
+                                XCHG(data[1], data[2], 1);
+                            }
+                            else
+                            {
+                                Console_Write("Niepoprawne użycie komendy.");
+                            }
+                        }
+                        else
+                        {
+                            Console_Write("Niepoprawne użycie komendy.");
                         }
                     }
                     else
@@ -81,9 +124,32 @@ namespace UI
                         Console_Write($"Niepoprawna ilość danych.");
                     }
                     break;
+
                 default:
                     Console_Write("Niepoprawna komenda.");
                     break;
+            }
+        }
+
+        private void XCHG(string v1, string v2, int t)
+        {
+            if (t == 0)
+            {
+                string v1d = GetDataFromMainReg(v1);
+                string v2d = GetDataFromMainReg(v2);
+                SetRegisterContent(v1, v2d);
+                SetRegisterContent(v2, v1d);
+            }
+            else if (t == 1)
+            {
+                string v1d = GetDataFromReg(v1);
+                string v2d = GetDataFromReg(v2);
+                SetRegisterContent(v1, v2d);
+                SetRegisterContent(v2, v1d);
+            }
+            else
+            {
+                Console_Write("Error");
             }
         }
 
