@@ -54,7 +54,16 @@ namespace UI
                     if (data.Length == 3)
                     {
                         Console_Write($"Wykonano MOV {data[2]} -> {data[1]}");
-                        MOV(data[1], data[2]);
+
+                        if (data[2].Substring(data[2].Length - 1) == "h")
+                        {
+                            //calculate to hex
+                            MOV(data[1], CalculateToHex(data[2].TrimEnd('h')));
+                        }
+                        else
+                        {
+                            MOV(data[1], data[2]);
+                        }
                     }
                     else
                     {
@@ -65,6 +74,12 @@ namespace UI
                     Console_Write("Niepoprawna komenda.");
                     break;
             }
+        }
+
+        private string CalculateToHex(string v)
+        {
+            int t = int.Parse(v);
+            return t.ToString("X");
         }
 
         private void MOV(string v1, string v2)
@@ -78,8 +93,9 @@ namespace UI
             {
                 case "MOV":
                     Console_Write("MOV AX BX -- Skopiowanie rejestru BX do AX.");
-                    Console_Write("MOV AX 10h -- Wklejenie wartości 10 do rejestru AX.");
-                    Console_Write("MOV AX 0xF -- Wklejenie wartości 15 do rejestru AX.");
+                    Console_Write("MOV AX 10h -- Wklejenie wartości 10(decimal) do rejestru AX.");
+                    Console_Write("MOV AX 15 -- Wklejenie wartości 0x0015 do rejestru AX.");
+                    Console_Write("MOV AL 15 -- Wklejenie wartości 0x15 do rejestru AL.");
                     break;
                 default:
                     Console_Write($"Brak komendy o nazwie {v}");
