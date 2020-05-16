@@ -54,8 +54,15 @@ namespace UI
                     if (data.Length == 3)
                     {
                         Console_Write($"Wykonano MOV {data[2]} -> {data[1]}");
-
-                        if (data[2].Substring(data[2].Length - 1) == "h")
+                        if (data[2] == "AX" || data[2] == "BX" || data[2] == "CX" || data[2] == "DX") 
+                        {
+                            MOV(data[1], GetDataFromMainReg(data[2]));
+                        } 
+                        else if (data[2] == "AL" || data[2] == "AH" || data[2] == "BL" || data[2] == "BH" || data[2] == "CL" || data[2] == "CH" || data[2] == "DL" || data[2] == "DH")
+                        {
+                            MOV(data[1], GetDataFromReg(data[2]));
+                        }
+                        else if (data[2].Substring(data[2].Length - 1) == "h")
                         {
                             MOV(data[1], data[2].TrimEnd('h'));
                         }
@@ -79,10 +86,86 @@ namespace UI
             }
         }
 
+        private string GetDataFromReg(string v)
+        {
+            switch (v)
+            {
+                case "AL":
+                    char[] al = ALContent.Content.ToString().ToCharArray();
+                    return $"{al[2]}{al[3]}";
+                    break;
+                case "AH":
+                    char[] ah = AHContent.Content.ToString().ToCharArray();
+                    return $"{ah[2]}{ah[3]}";
+                    break;
+                case "BL":
+                    char[] bl = BLContent.Content.ToString().ToCharArray();
+                    return $"{bl[2]}{bl[3]}";
+                    break;
+                case "BH":
+                    char[] bh = BHContent.Content.ToString().ToCharArray();
+                    return $"{bh[2]}{bh[3]}";
+                    break;
+                case "CL":
+                    char[] cl = CLContent.Content.ToString().ToCharArray();
+                    return $"{cl[2]}{cl[3]}";
+                    break;
+                case "CH":
+                    char[] ch = CHContent.Content.ToString().ToCharArray();
+                    return $"{ch[2]}{ch[3]}";
+                    break;
+                case "DL":
+                    char[] dl = DLContent.Content.ToString().ToCharArray();
+                    return $"{dl[2]}{dl[3]}";
+                    break;
+                case "DH":
+                    char[] dh = DHContent.Content.ToString().ToCharArray();
+                    return $"{dh[2]}{dh[3]}";
+                    break;
+
+                default:
+                    return "0000";
+                    break;
+            }
+        }
+
+        private string GetDataFromMainReg(string v)
+        {
+            switch (v)
+            {
+                case "AX":
+                    char[] ax = AXContent.Content.ToString().ToCharArray();
+                    return $"{ax[2]}{ax[3]}{ax[4]}{ax[5]}";
+                    break;
+                case "BX":
+                    char[] bx = BXContent.Content.ToString().ToCharArray();
+                    return $"{bx[2]}{bx[3]}{bx[4]}{bx[5]}";
+                    break;
+                case "CX":
+                    char[] cx = CXContent.Content.ToString().ToCharArray();
+                    return $"{cx[2]}{cx[3]}{cx[4]}{cx[5]}";
+                    break;
+                case "DX":
+                    char[] dx = DXContent.Content.ToString().ToCharArray();
+                    return $"{dx[2]}{dx[3]}{dx[4]}{dx[5]}";
+                    break;
+                default:
+                    return "0000";
+                    break;
+            }
+        }
+
         private string CalculateToHex(string v)
         {
-            int t = int.Parse(v);
-            return t.ToString("X");
+            try
+            {
+                int t = int.Parse(v);
+                return t.ToString("X");
+            } catch (Exception e)
+            {
+                Console_Write(e.Message + " Zresetowano rejestr.");
+                return "0000";
+            }
         }
 
         private void MOV(string v1, string v2)
@@ -282,7 +365,7 @@ namespace UI
             }
             else if (data.Length > 2)
             {
-                Console_Write("Przekroczono limit rejestru!");
+                Console_Write("Przekroczono limit dla tego rejestru!");
                 return "00";
             }
             else
