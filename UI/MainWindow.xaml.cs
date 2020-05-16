@@ -57,12 +57,15 @@ namespace UI
 
                         if (data[2].Substring(data[2].Length - 1) == "h")
                         {
-                            //calculate to hex
-                            MOV(data[1], CalculateToHex(data[2].TrimEnd('h')));
+                            MOV(data[1], data[2].TrimEnd('h'));
+                        }
+                        else if (data[2].Substring(data[2].Length - 1) == "H")
+                        {
+                            MOV(data[1], data[2].TrimEnd('H'));
                         }
                         else
                         {
-                            MOV(data[1], data[2]);
+                            MOV(data[1], CalculateToHex(data[2]));
                         }
                     }
                     else
@@ -93,9 +96,9 @@ namespace UI
             {
                 case "MOV":
                     Console_Write("MOV AX BX -- Skopiowanie rejestru BX do AX.");
-                    Console_Write("MOV AX 10h -- Wklejenie wartości 10(decimal) do rejestru AX.");
-                    Console_Write("MOV AX 15 -- Wklejenie wartości 0x0015 do rejestru AX.");
-                    Console_Write("MOV AL 15 -- Wklejenie wartości 0x15 do rejestru AL.");
+                    Console_Write("MOV AX 10 -- Wklejenie wartości 10(decimal) do rejestru AX.");
+                    Console_Write("MOV AX 15h -- Wklejenie wartości 0x0015(hexadecimal) do rejestru AX.");
+                    Console_Write("MOV AL 15h -- Wklejenie wartości 0x15(hexadecimal) do rejestru AL.");
                     break;
                 default:
                     Console_Write($"Brak komendy o nazwie {v}");
